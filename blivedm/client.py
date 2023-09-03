@@ -104,7 +104,7 @@ class BLiveClient:
     def __init__(
         self,
         room_id,
-        uid=0,
+        uid=None,
         session: Optional[aiohttp.ClientSession] = None,
         heartbeat_interval=30,
         ssl: Union[bool, ssl_.SSLContext] = True,
