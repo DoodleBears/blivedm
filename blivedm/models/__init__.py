@@ -25,7 +25,7 @@ class HeartbeatMessage:
     """
 
     popularity: int = 0
-    """人气值"""
+    """人气值，已废弃"""
 
     @classmethod
     def from_command(cls, data: dict):
