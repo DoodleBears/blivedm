@@ -12,7 +12,6 @@ __all__ = (
 
 logger = logging.getLogger('blivedm')
 
-
 logged_unknown_cmds = {
     'COMBO_SEND',
     'ENTRY_EFFECT',
@@ -71,11 +70,6 @@ class BaseHandler(HandlerInterface):
             client, web_models.DanmakuMessage.from_command(command['info'], command.get('dm_v2', ''))
         )
 
-    def __interact_word_callback(self, client: ws_base.WebSocketClientBase, command: dict):
-        return self._on_interact_word(
-            client, web_models.InteractMessage.from_command(command['data'])
-            )
-
     # cmd -> 处理回调
     _CMD_CALLBACK_DICT: Dict[
         str,
@@ -96,7 +90,8 @@ class BaseHandler(HandlerInterface):
         # 醒目留言
         'SUPER_CHAT_MESSAGE': _make_msg_callback('_on_super_chat', web_models.SuperChatMessage),
         # 有人进入直播间
-        'INTERACT_WORD': __interact_word_callback,
+        # 'INTERACT_WORD': __interact_word_callback,
+        'INTERACT_WORD': _make_msg_callback('_on_interact_word', web_models.InteractMessage),
 
         'SUPER_CHAT_MESSAGE_DELETE': _make_msg_callback('_on_super_chat_delete', web_models.SuperChatDeleteMessage),
 
